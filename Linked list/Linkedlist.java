@@ -1,0 +1,169 @@
+//  reversing linkedlist by iterative method and recursive method.
+// Just copy whole program and name file same as above.
+
+package LinkedList;
+
+class Linkedlist {
+
+    Node head;
+    private int size;
+
+    Linkedlist() {
+        size = 0;
+    }
+
+    public class Node {
+        int data;
+        Node next;
+
+        Node(int data) {
+            this.data = data;
+            this.next = null;
+            size++;
+        }
+    }
+
+    public void addFirst(int data) {
+        Node newNode = new Node(data);
+        newNode.next = head;
+        head = newNode;
+    }
+
+    public void addLast(int data) {
+        Node newNode = new Node(data);
+
+        if(head == null) {
+            head = newNode;
+            return;
+        }
+
+        Node lastNode = head;
+        while(lastNode.next != null) {
+            lastNode = lastNode.next;
+        }
+
+        lastNode.next = newNode;
+    }
+
+    public void printList() {
+        Node currNode = head;
+
+        while(currNode != null) {
+            System.out.print(currNode.data+" -> ");
+            currNode = currNode.next;
+        }
+
+        System.out.println("null");
+    }
+
+    public void removeFirst() {
+        if(head == null) {
+            System.out.println("Empty List, nothing to delete");
+            return;
+        }
+
+        head = this.head.next;
+        size--;
+    }
+
+    public void removeLast() {
+        if(head == null) {
+            System.out.println("Empty List, nothing to delete");
+            return;
+        }
+
+        size--;
+        if(head.next == null) {
+            head = null;
+            return;
+        }
+
+        Node currNode = head;
+        Node lastNode = head.next;
+        while(lastNode.next != null) {
+            currNode = currNode.next;
+            lastNode = lastNode.next;
+        }
+
+        currNode.next = null;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void addInMiddle(int index, int data) {
+        if(index > size || index < 0) {
+            System.out.println("Invalid Index value");
+            return;
+        }
+        size++;
+
+        Node newNode = new Node(data);
+        if(head == null || index == 0) {
+            newNode.next = head;
+            head = newNode;
+            return;
+        }
+        Node currNode = head;
+        for(int i=1; i<size; i++) {
+            if(i == index) {
+                Node nextNode = currNode.next;
+                currNode.next = newNode;
+                newNode.next = nextNode;
+                break;
+            }
+            currNode = currNode.next;
+        }
+    }
+
+    public void reverseLinkedList(){
+
+        if(head == null || head.next == null){
+            return;
+        }
+
+        Node curr = head, pre = null, next = null;
+        while(curr != null){
+            next = curr.next;
+            curr.next = pre;
+
+            //update previous and current value
+            pre = curr;
+            curr = next;
+        }
+        head.next = null;
+        head = pre;
+    }
+
+    public Node reverseListRecursive(Node head){
+        if(head == null || head.next == null){
+            System.out.println(head + " lol");
+            return head;
+        }
+        Node newHead = reverseListRecursive(head.next);
+        System.out.println(newHead);
+
+        head.next.next = head;
+        head.next = null;
+        return newHead;
+    }
+
+    public static void main(String args[]) {
+        Linkedlist list = new Linkedlist();
+        list.addLast(2);
+        list.addLast(5);
+        list.addLast(7);
+        list.addLast(9);
+        list.printList();
+
+        /*list.reverseLinkedList();
+
+        list.printList();*/
+
+        list.head = list.reverseListRecursive(list.head);
+
+        list.printList();
+    }
+}
+
