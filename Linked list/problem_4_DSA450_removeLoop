@@ -1,0 +1,136 @@
+//Save this file as name Linkedlist.java
+
+import java.util.*;
+
+class Linkedlist {
+
+    Node head;
+    private int size;
+
+    Linkedlist() {
+        size = 0;
+    }
+
+    public class Node {
+        int data;
+        Node next;
+
+        Node(int data) {
+            this.data = data;
+            this.next = null;
+            size++;
+        }
+    }
+    
+    public void addLast(int data) {
+        Node newNode = new Node(data);
+
+        if(head == null) {
+            head = newNode;
+            return;
+        }
+
+        Node lastNode = head;
+        while(lastNode.next != null) {
+            lastNode = lastNode.next;
+        }
+
+        lastNode.next = newNode;
+    }
+
+    public void printList() {
+        Node currNode = head;
+
+        while(currNode != null) {
+            System.out.print(currNode.data+" -> ");
+            currNode = currNode.next;
+        }
+
+        System.out.println("null");
+    }
+
+    public void detectAndRemoveLoop(Node head){
+    /*//Not a good way because you just deleted whole data in linked List. Congratulation.
+        Node temp = head,prev = null;
+        while(temp.next != null){
+
+            if(temp.data == -1){
+                prev.next = null;
+                break;
+            }
+            else{
+                temp.data = -1;
+                prev = temp;
+                temp = temp.next;
+            }
+        }*/
+       
+       /*//This another good way to detet and delete the loop
+       //time complexity:O(n) & auxiliary space:O(n)
+       int n=0;
+        ArrayList<Node> prev = new ArrayList<>(n);
+        Node temp = head,lastNode = null;
+        while(temp != null){
+            if(prev.contains(temp)){
+                System.out.println("This is the lastnode of loop : " + lastNode.data);
+                lastNode.next = null;
+                break;
+            }
+            else{
+                prev.add(temp);
+                lastNode = temp;
+                temp = temp.next;
+            }
+
+        }*/
+        
+        //Best way to detect and delete loop
+        //time complexity:O(n) & auxiliary space:O(1)
+        //We need below code to go to the point where slow = fast
+        Node slow = head, fast = head, prev = null;
+
+        slow = slow.next;
+        fast = fast.next.next;
+
+        while (fast != null && fast.next != null) {
+            if (slow == fast) {
+                break;
+            }
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        //We use prev pointer to be placed at the last node of loop cycle.
+        slow = head;
+        while (slow != fast) {
+            prev = fast;
+            slow = slow.next;
+            fast = fast.next;
+        }
+
+        System.out.println(prev.data);
+        prev.next = null; //This will remove the connection between last node of loop and loophead.
+    }
+
+    public static void main(String args[]) {
+        Linkedlist list = new Linkedlist();
+        list.addLast(1);
+        list.addLast(2);
+        list.addLast(3);
+        list.addLast(4);
+        list.addLast(23);
+        list.addLast(9);
+        list.addLast(5);
+        list.addLast(7);
+
+        //Creating looping in List for testing
+        list.head.next.next.next.next.next = list.head;
+
+        list.detectAndRemoveLoop(list.head);
+        System.out.print("The linkedlist after removing loop : ");
+        list.printList();
+
+
+    }
+}
+
