@@ -70,6 +70,8 @@ class Linkedlist {
                 temp = temp.next;
             }
         }
+        
+    }
     
     public static void main(String args[]) {
         Linkedlist list = new Linkedlist();
