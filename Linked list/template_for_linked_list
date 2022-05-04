@@ -1,3 +1,5 @@
+//Save the file as Linkedlist.java
+
 class Linkedlist {
 
     Node head;
