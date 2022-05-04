@@ -1,0 +1,60 @@
+//Save the file as array.java
+
+public class array {
+
+    //Time complexity:O(n) space complexity : O(n)
+    /*public int[] reverseArray(int[] arr,int size){
+        int[] newArray = new int[size];
+        int j=0;
+        for(int i=size-1;i>=0;i--){
+            newArray[j] = arr[i];
+            j++;
+        }
+
+        return newArray;
+
+    }*/
+
+    //Time complexity:O(n) space complexity : O(1)
+    public void reverseArray(int[] arr,int start,int end){
+        int temp;
+
+        while(start < end){
+            temp = arr[start];
+            arr[start] = arr[end];
+            arr[end] = temp;
+            start++;
+            end--;
+        }
+    }
+
+    public void printArray(int[] arr,int size){
+
+        for(int i=0;i<size;i++){
+            System.out.println(arr[i]);
+        }
+
+    }
+
+    public static void main(String[] args){
+        array Array = new array();
+        int[] arr = {1,2,3,4,5};
+        int size = 5;
+        
+        //This commented code can be used for taking input from user i.e.size of array and elements of array
+        /*Scanner sc = new Scanner(System.in);
+        Scanner st = new Scanner(System.in);
+
+        System.out.println("Enter the size of array : ");
+        int size = st.nextInt();
+
+        int[] arr = new int[size];
+        System.out.println("Enter the elements of array : ");
+        for(int i=0;i<size;i++){
+            arr[i] = sc.nextInt();
+        }*/
+
+        Array.reverseArray(arr,0,size-1);
+        Array.printArray(arr,size);
+    }
+}
