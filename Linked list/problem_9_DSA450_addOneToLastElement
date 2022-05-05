@@ -1,0 +1,108 @@
+//Save the file as Linkedlist.java
+
+class Linkedlist {
+
+    Node head;
+    private int size;
+
+    Linkedlist() {
+        size = 0;
+    }
+
+    public class Node {
+        int data;
+        Node next;
+
+        Node(int data) {
+            this.data = data;
+            this.next = null;
+            size++;
+        }
+    }
+    
+    public void addLast(int data) {
+        Node newNode = new Node(data);
+
+        if(head == null) {
+            head = newNode;
+            return;
+        }
+
+        Node lastNode = head;
+        while(lastNode.next != null) {
+            lastNode = lastNode.next;
+        }
+
+        lastNode.next = newNode;
+    }
+
+    public void printList() {
+        Node currNode = head;
+
+        while(currNode != null) {
+            System.out.print(currNode.data+" -> ");
+            currNode = currNode.next;
+        }
+
+        System.out.println("null");
+    }
+    
+    public static Node reverseTheLinkedList(Node head){
+        Node curr = null, prev = null, next = null;
+        curr = head;
+        
+        while(curr != null){
+            next = curr.next;
+            curr.next = prev;
+            
+            prev = curr;
+            curr = next;
+        }
+        
+        head = prev;
+        return head;
+    }
+    
+    public static Node addOne(Node head) 
+    { 
+        Node newHead = null,temp = null;
+
+        newHead = reverseTheLinkedList(head);
+        temp = newHead;
+        
+        temp.data = temp.data + 1;
+        
+        while(temp != null){
+            if(temp.data == 10 && temp.next != null){
+                temp.data = 0;
+                temp = temp.next;
+                temp.data = temp.data + 1;
+            }
+           
+            else{
+                break;
+            }
+        }
+        
+        
+        head = reverseTheLinkedList(newHead); 
+        return head;
+        
+    }
+    
+    public static void main(String args[]) {
+        Linkedlist list = new Linkedlist();
+        list.addLast(1);
+        list.addLast(2);
+        list.addLast(2);
+        list.addLast(4);
+        list.addLast(4);
+        list.addLast(7);
+        list.addLast(9);
+        list.addLast(9);
+        
+        list.head = addOne(list.head);
+        list.printList();
+
+    }
+}
