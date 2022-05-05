@@ -1,0 +1,51 @@
+package array;
+
+import java.util.Scanner;
+
+public class array {
+
+    public void printArray(int[] arr,int size){
+
+        for(int i=0;i<size;i++){
+            System.out.println(arr[i]);
+        }
+
+    }
+
+    public void max_minElement(int[] arr,int size){
+        int max = 0,min = 1000000000;
+
+        for(int i=0;i<size;i++){
+            if(arr[i] > max){
+                max = arr[i];
+            }
+            if(arr[i] < min){
+                min = arr[i];
+            }
+
+
+        }
+        System.out.println("Max Element in array is : " + max + " Min Element in array is : " + min);
+    }
+
+    public static void main(String[] args){
+        array Array = new array();
+        int[] arr = {1,2,3000,-1520,5};
+        int size = 5;
+
+        //This commented code can be used for taking input from user i.e.size of array and elements of array
+        /*Scanner sc = new Scanner(System.in);
+        Scanner st = new Scanner(System.in);
+
+        System.out.println("Enter the size of array : ");
+        int size = st.nextInt();
+
+        int[] arr = new int[size];
+        System.out.println("Enter the elements of array : ");
+        for(int i=0;i<size;i++){
+            arr[i] = sc.nextInt();
+        }*/
+
+        Array.max_minElement(arr,5);
+    }
+}
