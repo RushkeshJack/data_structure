@@ -1,0 +1,29 @@
+//save this file as array.java
+
+import java.util.Scanner;
+
+public class array {
+
+    
+
+    public static void main(String[] args){
+        array Array = new array();
+        int[] arr = {1,2,3000,-1520,5};
+        int size = 5;
+
+        //This commented code can be used for taking input from user i.e.size of array and elements of array
+        /*Scanner sc = new Scanner(System.in);
+        Scanner st = new Scanner(System.in);
+
+        System.out.println("Enter the size of array : ");
+        int size = st.nextInt();
+
+        int[] arr = new int[size];
+        System.out.println("Enter the elements of array : ");
+        for(int i=0;i<size;i++){
+            arr[i] = sc.nextInt();
+        }*/
+
+
+    }
+}
