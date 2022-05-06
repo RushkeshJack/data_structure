@@ -104,4 +104,21 @@ class Linkedlist {
         
         
   }
+  
+  public static void main(String[] args) {
+        Linkedlist first = new Linkedlist();
+        Linkedlist second = new Linkedlist();
+        Linkedlist newList = new Linkedlist();
+        
+        first.addLast(1);
+        first.addLast(2);
+
+        second.addLast(1);
+        second.addLast(2);
+        second.addLast(3);
+
+        newList.head = newList.addTwoLists(first.head,second.head);
+        newList.printList();   
+
+    }
 }
