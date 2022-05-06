@@ -1,0 +1,14 @@
+//save this file as string.java
+
+package str;
+
+public class string {
+    
+
+    public static void main(String[] args){
+        char[] s = {'h','e','l','l','o'};
+        System.out.println(s);
+        reverseString(s);
+        System.out.println(s);
+    }
+}
