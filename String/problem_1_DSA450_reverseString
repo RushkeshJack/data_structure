@@ -1,0 +1,27 @@
+//save this file as string.java
+
+public class string {
+    public static void reverseString(char[] s) {
+
+        int size = 0;
+        size = s.length;
+
+        char temp;
+        int start=0,end=size-1;
+
+        while(start<end){
+            temp = s[start];
+            s[start] = s[end];
+            s[end] = temp;
+            start++;
+            end--;
+        }
+    }
+
+    public static void main(String[] args){
+        char[] s = {'h','e','l','l','o'};
+        System.out.println(s);
+        reverseString(s);
+        System.out.println(s);
+    }
+}
