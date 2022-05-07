@@ -1,0 +1,120 @@
+//Save the file as Linkedlist.java
+
+class Linkedlist {
+
+    Node head;
+    private int size;
+
+    Linkedlist() {
+        size = 0;
+    }
+
+    public class Node {
+        int data;
+        Node next;
+
+        Node(int data) {
+            this.data = data;
+            this.next = null;
+            size++;
+        }
+    }
+    
+    public void addLast(int data) {
+        Node newNode = new Node(data);
+
+        if(head == null) {
+            head = newNode;
+            return;
+        }
+
+        Node lastNode = head;
+        while(lastNode.next != null) {
+            lastNode = lastNode.next;
+        }
+
+        lastNode.next = newNode;
+    }
+
+    public void printList() {
+        Node currNode = head;
+
+        while(currNode != null) {
+            System.out.print(currNode.data+" -> ");
+            currNode = currNode.next;
+        }
+
+        System.out.println("null");
+    }
+    
+    public static Node reverseTheLinkedList(Node head){
+        Node curr = null, prev = null, next = null;
+        curr = head;
+
+        while(curr != null){
+            next = curr.next;
+            curr.next = prev;
+
+            prev = curr;
+            curr = next;
+        }
+
+        head = prev;
+        return head;
+    }
+    
+    public static Node findIntersection(Node head1, Node head2)
+    {
+        Node head = null;
+        
+        while(head1 != null || head2 != null){
+            
+            if(head1 == null || head2 == null){
+                break;
+            }
+            
+            if(head1.data == head2.data){
+                Node newNode = new Node(head1.data);
+
+                newNode.next = head;
+                head = newNode;
+                
+                head1 = head1.next;
+                head2 = head2.next;
+            }
+            
+            else if(head1.data > head2.data){
+                head2 = head2.next;
+            }
+            
+            else if(head1.data < head2.data){
+                head1 = head1.next;
+            }
+        }
+        
+        Node temp = head;
+        head = reverseTheLinkedList(temp);
+        
+        return head;
+    }
+    
+    public static void main(String[] args) {
+        Linkedlist first = new Linkedlist();
+        Linkedlist second = new Linkedlist();
+        Linkedlist newList = new Linkedlist();
+        
+        first.addLast(5);
+        first.addLast(9);
+        first.addLast(22);
+        first.addLast(32);
+        first.addLast(40);
+
+        second.addLast(1);
+        second.addLast(31);
+        second.addLast(40);
+
+        newList.head = newList.findIntersection(first.head,second.head);
+        newList.printList();
+
+    }
+}
