@@ -1,0 +1,84 @@
+// save this file que.java
+
+public class que {
+    int front = -1;
+    int rear = -1;
+    int size;
+    int[] array;
+
+    que(int size){
+        array = new int[size];
+        this.size = size;
+    }
+
+    public boolean isEmpty(){
+        return rear == -1;
+    }
+
+    public boolean isFull(){
+        return (rear+1)%size == front;
+    }
+
+    public void enqueue(int data){
+        if(isFull()){
+            System.out.println("Queue is full");
+        }
+        if(front == -1){ //This code is used if we add element in empty queue
+            front = 0;
+        }
+                                 //This code is used if we we need to add element in empty queue
+        rear = (rear+1) % size; //This will move the rear to correct position if there space in array. If there is no space in array the "Queue is full" occurs.
+        array[rear] = data;
+
+    }
+
+    public void dequeue(){
+        if(isEmpty()){
+            System.out.println("Queue is empty");
+            return;
+        }
+        if(front == rear){ // This code get executed if the removing elements continues
+            front = rear = -1;
+        }
+        else{
+            front = (front+1) % size; //This will move the front to correct position after remove element happens.
+        }
+    }
+
+    public int peek(){
+        if(isEmpty()){
+            System.out.println("Queue is empty");
+            return -1;
+        }
+
+        return array[front];
+    }
+
+    public static void main(String[] args){
+        que q = new que(6);
+        q.enqueue(1);
+        q.enqueue(2);
+        q.enqueue(3);
+        q.enqueue(4);
+        q.enqueue(5);
+        q.enqueue(6);
+
+        q.dequeue();
+        q.dequeue();
+        q.dequeue();
+        q.dequeue();
+        q.dequeue();
+
+        q.enqueue(8);
+        q.enqueue(9);
+
+        q.dequeue();
+
+        while(!q.isEmpty()){
+            System.out.println(q.peek());
+            q.dequeue();
+        }
+        
+    }
+
+}
