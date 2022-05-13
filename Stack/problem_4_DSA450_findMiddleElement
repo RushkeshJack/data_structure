@@ -1,0 +1,88 @@
+// save the file as doublyLinkedList.java
+
+public class doublyLinkedList {
+    doubleNode head;
+    doubleNode mid;
+    int count = 0;
+
+    public static class doubleNode{
+        int data;
+        doubleNode prev = null;
+        doubleNode next = null;
+
+        doubleNode(int data){
+            this.data = data;
+        }
+    }
+
+    public void push(int data){   //add first in list
+        doubleNode newNode = new doubleNode(data);
+        count++;
+        if(head == null){
+            head = newNode;
+            mid = head;
+            return;
+        }
+
+        if(count % 2 != 0){
+            mid = mid.prev;
+            head.prev = newNode;
+            newNode.next = head;
+            head = newNode;
+        }
+
+        else{
+            head.prev = newNode;
+            newNode.next = head;
+            head = newNode;
+        }
+    }
+
+    public void pop(){
+        doubleNode prevHead = null;
+        if(head == null){
+            System.out.println("Stack is empty");
+            return;
+        }
+
+        else{
+            prevHead = head.next;
+            head = prevHead;
+            head.prev = null;
+        }
+        count--;
+
+        if(count % 2 == 0){
+            mid = mid.next;
+        }
+    }
+
+    public int middleElement(){
+        if(head == null){
+            System.out.println("Stack is empty");
+            return -1;
+        }
+
+        return mid.data;
+
+    }
+
+
+
+    public static void main(String[] args){
+        doublyLinkedList stack = new doublyLinkedList();
+        stack.push(11);
+        stack.push(22);
+        stack.push(33);
+        stack.push(44);
+        stack.push(55);
+        stack.push(66);
+
+        stack.pop();
+        stack.pop();
+
+        System.out.println(stack.head.data);
+
+        System.out.println(stack.middleElement());
+    }
+}
